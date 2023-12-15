@@ -1,6 +1,7 @@
 #!/bin/bash
 DuckDNS_domain="tonyprojesp.duckdns.org"
 DuckDNS_token="4cb4b448-5ff9-474d-990a-cf196abdafa1"
+#use these since Tony will host gcp instance
 
 update_dns(){
      curr_ip=$(curl -s https://ipinfo.io/ip)
