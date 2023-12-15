@@ -5,8 +5,8 @@
 #include <PubSubClient.h>
 #include <WiFiUdp.h>
 
-const char *ssid = "Frontier1625";   //name of your WiFi network
-const char *password = "ColdIris1571"; //password of the WiFi network
+const char *ssid = "YOURWIFINAME";   //name of your WiFi network
+const char *password = "YOURWIFIPASSWORD"; //password of the WiFi network
 const char *gcpIP = "tonyprojesp.duckdns.org"; //"tonyprojesp.duckdns.org"
 const char *mqttTopic = "MudGameServ";
 const int mqttPort = 1883;
@@ -28,7 +28,7 @@ ezButton button4(4);
 String RoomDesc = "Waiting To Start";
 String RoomDesc2 = "";
 
-void setup() {
+void setup(){
   Serial.begin(115200);
   Serial.println("Esp32 is ready");
 
