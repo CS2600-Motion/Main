@@ -1,0 +1,23 @@
+#!/bin/bash
+DuckDNS_domain="tonyprojesp.duckdns.org"
+DuckDNS_token="4cb4b448-5ff9-474d-990a-cf196abdafa1"
+
+update_dns(){
+     curr_ip=$(curl -s https://ipinfo.io/ip)
+     curl -k "https://www.duckdns.org/update?domains=${DuckDNS_domain}&token=${DuckDNS_token}&ip=${curr_ip}"
+}
+mqttTopic="MudGameServ"
+update_dns
+echo ""
+desc=$(<$1/desc.txt)
+if [[ -d $1 ]]; then
+        cd ${1}
+        mosquitto_pub -h $DuckDNS_domain -t $mqttTopic -m "$desc"
+#       echo "you are in $1"
+        cd ..
+        sleep 1
+else
+        mosquitto_pub -h $DuckDNS_domain -t $mqttTopic -m "That path doesn't exist"
+        sleep 2
+        mosquitto_pub -h $DuckDNS_domain -t $mqttTopic -m "$desc"
+fi
