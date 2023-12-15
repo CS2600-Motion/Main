@@ -1,0 +1,90 @@
+echo "Welcome to Eli's World!"
+echo
+
+if [ ! -d "$(pwd)/$1" ]; then
+        echo "path doesn't exist"
+        exit 1
+fi
+
+#mainPath="$(pwd)/$1/MudGame/east/south/east"
+
+if [ -d "$(pwd)/$1/MudGame" ]; then
+        echo "file exists"
+        rm -rf "$(pwd)/$1/MudGame"
+        echo "Removed $(pwd)/$1/MudGame"
+fi
+
+
+mkdir -p "$(pwd)/$1/MudGame/west/south"
+mkdir -p "$(pwd)/$1/MudGame/north/east/east"
+mkdir -p "$(pwd)/$1/MudGame/east/south/south"
+mkdir -p "$(pwd)/$1/MudGame/east/south/east"
+mkdir -p "$(pwd)/$1/MudGame/east/north/east"
+
+# Home square
+
+touch "$(pwd)/$1/MudGame/desc.txt"
+echo "You start here. Where shall you go?" > "$(pwd)/$1/MudGame/desc.txt"
+
+# All rooms west of home
+
+touch "$(pwd)/$1/MudGame/west/desc.txt"
+echo "Is this it? Are you almost here?" > "$(pwd)/$1/MudGame/west/desc.txt"
+
+touch "$(pwd)/$1/MudGame/west/south/desc.txt"
+echo "Nope. Go right back where you came from." > "$(pwd)/$1/MudGame/west/south/desc.txt"
+
+# All rooms north of home
+
+touch "$(pwd)/$1/MudGame/north/desc.txt"
+echo "This is about as north as it gets." > "$(pwd)/$1/MudGame/north/desc.txt"
+
+touch "$(pwd)/$1/MudGame/north/east/desc.txt"
+echo "You're up too high." > "$(pwd)/$1/MudGame/north/east/desc.txt"
+
+touch "$(pwd)/$1/MudGame/north/east/east/desc.txt"
+echo "Do you listen to instructions, kid?" > "$(pwd)/$1/MudGame/north/east/east/desc.txt"
+
+# The remaining rooms
+
+touch "$(pwd)/$1/MudGame/east/desc.txt"
+echo "Good, good! Keep it going!" > "$(pwd)/$1/MudGame/east/desc.txt"
+
+touch "$(pwd)/$1/MudGame/east/south/desc.txt"
+echo "You've collected the lucky star! You're one step away from greatness!" > "$(pwd)/$1/MudGame/east/south/desc.txt"
+
+touch "$(pwd)/$1/MudGame/east/south/south/desc.txt"
+echo "Ouch. So close." > "$(pwd)/$1/MudGame/east/south/south/desc.txt"
+
+touch "$(pwd)/$1/MudGame/east/south/east/desc.txt"
+echo "We have a winner! You made it, champ." > "$(pwd)/$1/MudGame/east/south/east/desc.txt"
+
+# Shortcuts leading to home
+
+ln -s "$(pwd)/$1/MudGame" "$(pwd)/$1/MudGame/north/south"
+ln -s "$(pwd)/$1/MudGame" "$(pwd)/$1/MudGame/west/east"
+ln -s "$(pwd)/$1/MudGame" "$(pwd)/$1/MudGame/east/west"
+
+# Shortcuts leading to /west
+
+ln -s "$(pwd)/$1/MudGame/west" "$(pwd)/$1/MudGame/west/south/north"
+
+# Shortcuts leading to /north
+
+ln -s "$(pwd)/$1/MudGame/north" "$(pwd)/$1/MudGame/north/east/west"
+
+# Shortcuts leading to /east
+
+ln -s "$(pwd)/$1/MudGame/east/" "$(pwd)/$1/MudGame/east/north/south"
+ln -s "$(pwd)/$1/MudGame/east/" "$(pwd)/$1/MudGame/east/south/north"
+ln -s "$(pwd)/$1/MudGame/east/" "$(pwd)/$1/MudGame/north/east/south"
+
+# Shortcuts leading to /north/east
+
+ln -s "$(pwd)/$1/MudGame/north/east" "$(pwd)/$1/MudGame/east/north"
+ln -s "$(pwd)/$1/MudGame/north/east" "$(pwd)/$1/MudGame/north/east/east/west"
+
+# Shortcuts leading to /east/south
+
+ln -s "$(pwd)/$1/MudGame/east/south" "$(pwd)/$1/MudGame/east/south/south/north"
+ln -s "$(pwd)/$1/MudGame/east/south" "$(pwd)/$1/MudGame/east/south/east/west"
