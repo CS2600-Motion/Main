@@ -1,0 +1,68 @@
+#!/bin/bash
+#edit paths and such after
+#$1 to create your own map and add diff descriptions to, hard code everything
+
+echo "World Creation"
+echo "path entered $1"
+
+if [ ! -d "$(pwd)/$1" ]; then
+        echo "path doesn't exist"
+        exit 1
+fi
+
+#mainPath="$(pwd)/$1/MudGame/north/north/north/east/east/east"
+
+if [ -d "$(pwd)/$1/MudGame" ]; then
+        echo "file exists"
+        rm -rf "$(pwd)/$1/MudGame"
+        echo "Removed $(pwd)/$1/MudGame"
+fi
+
+#3 major paths
+mkdir -p "$(pwd)/$1/MudGame/north/north/east/east/east" 
+mkdir -p "$(pwd)/$1/MudGame/west/north/" 
+mkdir -p "$(pwd)/$1/MudGame/south/east" #item
+#descriptions for all rooms
+touch "$(pwd)/$1/MudGame/desc.txt"
+echo "You just appeared" > "$(pwd)/$1/MudGame/desc.txt"
+
+touch "$(pwd)/$1/MudGame/north/desc.txt"
+echo "What lies ahead.." > "$(pwd)/$1/MudGame/north/desc.txt"
+
+touch "$(pwd)/$1/MudGame/north/north/desc.txt"
+echo "keep going" > "$(pwd)/$1/MudGame/north/north/desc.txt"
+touch "$(pwd)/$1/MudGame/north/north/east/desc.txt"
+echo "See a sharp turn" > "$(pwd)/$1/MudGame/north/north/east/desc.txt"
+
+touch "$(pwd)/$1/MudGame/north/north/east/east/desc.txt"
+echo "there's a door" > "$(pwd)/$1/MudGame/north/north/east/east/desc.txt"
+
+touch "$(pwd)/$1/MudGame/north/north/east/east/east/desc.txt"
+echo "Secret Path???" > "$(pwd)/$1/MudGame/north/north/east/east/east/desc.txt"
+
+touch "$(pwd)/$1/MudGame/west/desc.txt"
+echo "There's a puddle of water" > "$(pwd)/$1/MudGame/west/desc.txt"
+
+touch "$(pwd)/$1/MudGame/west/north/desc.txt"
+echo "*you hear a metal sound*" > "$(pwd)/$1/MudGame/west/north/desc.txt"
+
+touch "$(pwd)/$1/MudGame/south/desc.txt"
+echo "You see something on the ground" > "$(pwd)/$1/MudGame/south/desc.txt"
+
+touch "$(pwd)/$1/MudGame/south/east/desc.txt"
+echo "You find a weapon" > "$(pwd)/$1/MudGame/south/east/desc.txt"
+
+#shortcuts to reverse
+ln -s "$(pwd)/$1/MudGame" "$(pwd)/$1/MudGame/north/south"
+ln -s "$(pwd)/$1/MudGame/north" "$(pwd)/$1/MudGame/north/north/south"
+ln -s "$(pwd)/$1/MudGame/north/north" "$(pwd)/$1/MudGame/north/north/east/west"
+ln -s "$(pwd)/$1/MudGame/north/north/east" "$(pwd)/$1/MudGame/north/north/east/east/west"
+ln -s "$(pwd)/$1/MudGame/north/north/east/east" "$(pwd)/$1/MudGame/north/north/east/east/east/west"
+
+ln -s "$(pwd)/$1/MudGame" "$(pwd)/$1/MudGame/west/east"
+ln -s "$(pwd)/$1/MudGame/west" "$(pwd)/$1/MudGame/west/north/south"
+ln -s "$(pwd)/$1/MudGame" "$(pwd)/$1/MudGame/south/north"
+ln -s "$(pwd)/$1/MudGame/south" "$(pwd)/$1/MudGame/south/east/west"
+#shortcuts for inf circles
+ln -s "$(pwd)/$1/MudGame/north" "$(pwd)/$1/MudGame/west/north/east"
+ln -s "$(pwd)/$1/MudGame/west/north" "$(pwd)/$1/MudGame/north/west"
